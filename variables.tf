@@ -21,6 +21,12 @@ variable "enabled" {
   default     = true
 }
 
+variable "create_vault" {
+  description = "Create a backup vault"
+  type        = bool
+  default     = false
+}
+
 variable "enable_random_suffix" {
   description = "Append a random identifier to the name"
   type        = bool

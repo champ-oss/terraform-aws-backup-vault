@@ -9,15 +9,13 @@ locals {
   random_name  = try("${local.trimmed_name}-${random_id.this[0].hex}", local.trimmed_name)
 }
 
-data "aws_region" "this" {}
-
 resource "random_id" "this" {
-  count       = var.enabled ? 1 : 0
+  count       = var.enabled && var.create_vault ? 1 : 0
   byte_length = 3
 }
 
 resource "aws_backup_logically_air_gapped_vault" "this" {
-  count              = var.enabled ? 1 : 0
+  count              = var.enabled && var.create_vault ? 1 : 0
   provider           = aws.target
   name               = var.enable_random_suffix ? local.random_name : local.trimmed_name
   max_retention_days = var.max_retention_days
@@ -26,7 +24,7 @@ resource "aws_backup_logically_air_gapped_vault" "this" {
 }
 
 module "ssm" {
-  count                     = var.enabled ? 1 : 0
+  count                     = var.enabled && var.create_vault ? 1 : 0
   source                    = "github.com/champ-oss/terraform-aws-ssm.git?ref=v1.0.5-78c79ac"
   git                       = var.git
   enable_resources          = var.enabled
@@ -37,4 +35,9 @@ module "ssm" {
   type                      = "String"
   tier                      = "Standard"
   tags                      = merge(local.tags, var.tags)
+}
+
+data "aws_ssm_parameter" "this" {
+  count = var.enabled ? 1 : 0
+  name  = var.enable_random_suffix ? local.random_name : local.trimmed_name
 }
