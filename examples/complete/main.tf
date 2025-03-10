@@ -1,23 +1,16 @@
-data "aws_vpcs" "this" {
-  tags = {
-    purpose = "vega"
-  }
-}
-
-data "aws_subnets" "this" {
-  tags = {
-    purpose = "vega"
-    Type    = "Private"
-  }
-
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpcs.this.ids[0]]
-  }
+provider "aws" {
+  alias  = "aws.target"
+  region = "us-west-1"
 }
 
 module "this" {
-  source             = "../../"
-  private_subnet_ids = data.aws_subnets.this.ids
-  vpc_id             = data.aws_vpcs.this.ids[0]
+  source = "../../"
+  git    = "terraform-aws-backup-vault"
+  providers = {
+    aws.target = aws.target
+  }
+}
+
+output "outputs" {
+  value = module.this
 }
