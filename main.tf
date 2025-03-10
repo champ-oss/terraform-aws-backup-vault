@@ -40,5 +40,5 @@ module "ssm" {
 data "aws_ssm_parameters_by_path" "this" {
   depends_on = [module.ssm]
   count      = var.enabled ? 1 : 0
-  path       = var.enable_random_suffix ? "/${local.random_name}" : "/${local.trimmed_name}"
+  path       = var.enable_random_suffix ? "/${local.random_name}/" : "/${local.trimmed_name}/"
 }
