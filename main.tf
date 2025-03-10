@@ -37,8 +37,8 @@ module "ssm" {
   tags                      = merge(local.tags, var.tags)
 }
 
-data "aws_ssm_parameters_by_path" "this" {
+data "aws_ssm_parameter" "this" {
   depends_on = [module.ssm]
   count      = var.enabled ? 1 : 0
-  path       = var.enable_random_suffix ? "/${local.random_name}/" : "/${local.trimmed_name}/"
+  name       = var.enable_random_suffix ? local.random_name : local.trimmed_name
 }
