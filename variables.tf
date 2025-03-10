@@ -12,7 +12,7 @@ variable "tags" {
 variable "name" {
   type        = string
   description = "Name used to identify resources"
-  default     = "account-default"
+  default     = "backup-vault-default"
 }
 
 variable "enabled" {
@@ -36,5 +36,5 @@ variable "max_retention_days" {
 variable "min_retention_days" {
   description = "The minimum retention period that the vault retains its recovery points."
   type        = number
-  default     = 3
+  default     = 7
 }

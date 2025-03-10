@@ -12,6 +12,7 @@ locals {
 data "aws_region" "this" {}
 
 resource "random_id" "this" {
+  count       = var.enabled ? 1 : 0
   byte_length = 3
 }
 
@@ -33,5 +34,7 @@ module "ssm" {
   enable_random_name_suffix = var.enable_random_suffix
   name                      = var.enable_random_suffix ? local.random_name : local.trimmed_name
   value                     = aws_backup_logically_air_gapped_vault.this[0].arn
+  type                      = "String"
+  tier                      = "Standard"
   tags                      = merge(local.tags, var.tags)
 }
