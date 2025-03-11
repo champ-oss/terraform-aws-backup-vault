@@ -13,8 +13,7 @@ module "this" {
 }
 
 output "outputs" {
-  sensitive = false
-  value     = module.this
+  value = module.this
 }
 
 #
