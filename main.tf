@@ -42,9 +42,3 @@ data "aws_ssm_parameter" "this" {
   count      = var.enabled ? 1 : 0
   name       = var.enable_random_suffix ? local.random_name : local.trimmed_name
 }
-
-
-import {
-  to = aws_backup_logically_air_gapped_vault.this[0]
-  id = "backup-vault-default"
-}
