@@ -22,7 +22,7 @@ output "outputs" {
 #   id = "backup-vault-default"
 # }
 
-import {
-  to = module.this.aws_ssm_parameter.this[0]
-  id = "backup-vault-default"
-}
+# import {
+#   to = module.this.aws_ssm_parameter.this[0]
+#   id = "backup-vault-default"
+# }
