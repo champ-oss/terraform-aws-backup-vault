@@ -17,12 +17,12 @@ output "outputs" {
 }
 
 
-import {
-  to = module.this.aws_backup_logically_air_gapped_vault.this[0]
-  id = "backup-vault-default"
-}
-
-import {
-  to = module.this.aws_ssm_parameter.this[0]
-  id = "backup-vault-default"
-}
+# import {
+#   to = module.this.aws_backup_logically_air_gapped_vault.this[0]
+#   id = "backup-vault-default"
+# }
+#
+# import {
+#   to = module.this.aws_ssm_parameter.this[0]
+#   id = "backup-vault-default"
+# }
