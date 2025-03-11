@@ -1,6 +1,6 @@
 output "vault_arn" {
   description = "The ARN of the backup vault"
-  sensitive   = true
+  sensitive   = false
   value       = try(data.aws_ssm_parameter.this[0].value, null)
 }
 
