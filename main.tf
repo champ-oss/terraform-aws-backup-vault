@@ -23,20 +23,6 @@ resource "aws_backup_logically_air_gapped_vault" "this" {
   tags               = merge(local.tags, var.tags)
 }
 
-# module "ssm" {
-#   count                     = var.enabled && var.create_vault ? 1 : 0
-#   source                    = "github.com/champ-oss/terraform-aws-ssm.git?ref=v1.0.5-78c79ac"
-#   git                       = var.git
-#   enable_resources          = var.enabled
-#   enabled                   = var.enabled
-#   enable_random_name_suffix = var.enable_random_suffix
-#   name                      = var.enable_random_suffix ? local.random_name : local.trimmed_name
-#   value                     = aws_backup_logically_air_gapped_vault.this[0].arn
-#   type                      = "String"
-#   tier                      = "Standard"
-#   tags                      = merge(local.tags, var.tags)
-# }
-
 resource "aws_ssm_parameter" "this" {
   count          = var.enabled && var.create_vault ? 1 : 0
   name           = var.enable_random_suffix ? local.random_name : local.trimmed_name
