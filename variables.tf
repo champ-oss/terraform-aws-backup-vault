@@ -10,9 +10,15 @@ variable "tags" {
 }
 
 variable "name" {
-  type        = string
   description = "Name used to identify resources"
+  type        = string
   default     = "backup-vault-default"
+}
+
+variable "ssm_prefix" {
+  description = "Name of the SSM parameter"
+  type        = string
+  default     = "/backup/"
 }
 
 variable "enabled" {

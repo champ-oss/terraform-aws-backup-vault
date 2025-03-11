@@ -6,7 +6,7 @@ provider "aws" {
 module "this" {
   source       = "../../"
   git          = "terraform-aws-backup-vault"
-  create_vault = false
+  create_vault = true
   providers = {
     aws.target = aws.usw1
   }
