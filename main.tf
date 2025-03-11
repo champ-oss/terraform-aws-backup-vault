@@ -32,8 +32,14 @@ resource "aws_ssm_parameter" "this" {
   tags           = merge(local.tags, var.tags)
 }
 
-data "aws_ssm_parameter" "this" {
+# data "aws_ssm_parameter" "this" {
+#   depends_on = [aws_ssm_parameter.this]
+#   count      = var.enabled ? 1 : 0
+#   name       = local.ssm_name
+# }
+
+data "aws_ssm_parameters_by_path" "this" {
   depends_on = [aws_ssm_parameter.this]
   count      = var.enabled ? 1 : 0
-  name       = local.ssm_name
+  path       = local.ssm_name
 }
