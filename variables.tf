@@ -18,7 +18,7 @@ variable "name" {
 variable "ssm_prefix" {
   description = "Name of the SSM parameter"
   type        = string
-  default     = "/backup/"
+  default     = "/backup/default/"
 }
 
 variable "enabled" {

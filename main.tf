@@ -41,5 +41,5 @@ resource "aws_ssm_parameter" "this" {
 data "aws_ssm_parameters_by_path" "this" {
   depends_on = [aws_ssm_parameter.this]
   count      = var.enabled ? 1 : 0
-  path       = "${local.ssm_name}/"
+  path       = var.ssm_prefix
 }
