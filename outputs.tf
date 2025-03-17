@@ -1,14 +1,9 @@
-output "aws_region" {
-  description = "AWS region name"
-  value       = data.aws_region.this.name
+output "vault_arn" {
+  description = "The ARN of the backup vault"
+  value       = nonsensitive(try(data.aws_ssm_parameters_by_path.this[0].values[0], null))
 }
 
-output "private_subnet_ids" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_subnet_group#subnet_ids"
-  value       = var.private_subnet_ids
-}
-
-output "vpc_id" {
-  description = "https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group#vpc_id"
-  value       = var.vpc_id
+output "ssm_arn" {
+  description = "The ARN of the SSM parameter"
+  value       = try(aws_ssm_parameter.this[0].arn, null)
 }

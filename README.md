@@ -1,4 +1,4 @@
-# terraform-module-template
+# terraform-aws-backup-vault
 
 <!-- BEGIN_TF_DOCS -->
 ## Requirements
